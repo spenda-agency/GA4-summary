@@ -1,0 +1,82 @@
+name: GA4 Daily Report Summary
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install google-analytics-data
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.name: GA4 Daily Report Summary
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install google-analytics-data
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    - name: Fetch GA4 Report
+      env:
+        GA4_PROPERTY_ID: ${{ secrets.336463543 }}
+      run: python get_ga4_data.py
+
+    - name: Summarize with Gemini
+      uses: 'google-github-actions/run-gemini-cli@v0'
+      with:
+        prompt: "Please summarize the following Google Analytics report. Provide key insights and trends in a concise way. The report is in the file 'report.txt'."
+        gemini_api_key: '${{ secrets.AIzaSyDmwvfkZqv1hacThykrDtMVO39xzkU11co }}'
+        include: "report.txt"
+ }}'
+
+    - name: Fetch GA4 Report
+      env:
+        GA4_PROPERTY_ID: ${{ secrets.336463543 }}
+      run: python get_ga4_data.py
+
+    - name: Summarize with Gemini
+      uses: 'google-github-actions/run-gemini-cli@v0'
+      with:
+        prompt: "Please summarize the following Google Analytics report. Provide key insights and trends in a concise way. The report is in the file 'report.txt'."
+        gemini_api_key: '${{ secrets.AIzaSyDmwvfkZqv1hacThykrDtMVO39xzkU11co }}'
+        include: "report.txt"
